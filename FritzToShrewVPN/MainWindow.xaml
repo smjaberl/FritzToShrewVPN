@@ -1,0 +1,40 @@
+﻿<Window
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:FritzToShrewVPN"
+         x:Class="FritzToShrewVPN.MainWindow"
+        mc:Ignorable="d"
+        Title="FritzToShrewsoftVPN" Height="339.755" Width="453.756" ShowInTaskbar="False" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" HorizontalAlignment="Left" VerticalAlignment="Top">
+    <Grid Margin="10,0,0,1" HorizontalAlignment="Left" Width="439">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="241*"/>
+            <ColumnDefinition Width="198*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="310"/>
+            <RowDefinition Height="0*"/>
+        </Grid.RowDefinitions>
+        <TextBox x:Name="textBoxConnection" HorizontalAlignment="Left" Height="23" Margin="157,119,0,0" TextWrapping="Wrap" Text= "{Binding Path=ConName, Mode=TwoWay}" VerticalAlignment="Top" Width="120" RenderTransformOrigin="0.531,2.584" Grid.ColumnSpan="2"></TextBox>
+        <ComboBox x:Name="comboBoxConnection" HorizontalAlignment="Left" Margin="157,92,0,0" VerticalAlignment="Top" Width="120" SelectionChanged="comboBoxConnection_SelectionChanged" Height="22" Grid.ColumnSpan="2"/>
+        <RadioButton x:Name="radioButtonNew" Content="neue Verbindung anlegen" HorizontalAlignment="Left" Margin="10,62,0,0" VerticalAlignment="Top" GroupName="NewEdit" Checked="radioButtonNew_Checked" Height="15" Width="156" IsChecked="True"/>
+        <RadioButton x:Name="radioButtonEdit" Content="vorhandene Verbindung bearbeiten" HorizontalAlignment="Left" Margin="10,42,0,0" VerticalAlignment="Top" GroupName="NewEdit" Checked="radioButtonEdit_Checked" Height="15" Width="207"/>
+        <RadioButton x:Name="radioButtonCopy" Content="Kopie der gewählten Verbindung erstellen" HorizontalAlignment="Left" Margin="10,22,0,0" VerticalAlignment="Top" GroupName="NewEdit" Checked="radioButtonCopy_Checked" Height="15" Width="241" Grid.ColumnSpan="2"/>
+        <TextBox x:Name="textBoxHost" HorizontalAlignment="Left" Height="23" Margin="10,212,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="131" Text= "{Binding Path=Host, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"></TextBox>
+        <TextBox x:Name="textBoxUser" HorizontalAlignment="Left" Height="23" Margin="146,212,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="131" Text= "{Binding Path=User, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Grid.ColumnSpan="2"></TextBox>
+        <TextBox x:Name="textBoxPSK" HorizontalAlignment="Left" Height="23" Margin="41,211,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="131" Text= "{Binding Path=PSK, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Grid.Column="1"></TextBox>
+        <Label x:Name="label" Content="IP oder Domainname" HorizontalAlignment="Left" Margin="10,167,0,0" VerticalAlignment="Top" Height="26" Width="122"/>
+        <Label x:Name="label1" Content="Benutzername" HorizontalAlignment="Left" Margin="146,167,0,0" VerticalAlignment="Top" Height="28" Width="86"/>
+        <Label x:Name="label2" Content="Pre Shared Secret" HorizontalAlignment="Left" Margin="41,185,0,0" VerticalAlignment="Top" Height="26" Width="103" Grid.Column="1"/>
+        <Label x:Name="label3" Content="für FritzBox" HorizontalAlignment="Left" Margin="146,185,0,0" VerticalAlignment="Top" Height="26" Width="70"/>
+        <Label x:Name="label4" Content="der FritBox" HorizontalAlignment="Left" Margin="10,186,0,0" VerticalAlignment="Top" Height="26" Width="67"/>
+        <Button x:Name="buttonSave" Content="Speichern" HorizontalAlignment="Left" Margin="57,261,0,0" VerticalAlignment="Top" Width="75" HorizontalContentAlignment="Center" Click="buttonSave_Click" Height="20"/>
+        <Button x:Name="buttonSaveExit" Content="Speichern und Beenden" HorizontalAlignment="Left" Margin="146,261,0,0" VerticalAlignment="Top" Width="134" HorizontalContentAlignment="Center" Click="buttonSaveExit_Click" Height="20" Grid.ColumnSpan="2"/>
+        <Button x:Name="buttonExit" Content="Beenden" HorizontalAlignment="Left" Margin="56,261,0,0" VerticalAlignment="Top" Width="75" HorizontalContentAlignment="Center" Click="buttonExit_Click" Height="20" Grid.Column="1"/>
+        <Label x:Name="label5" Content="vorhandene Verbindung" HorizontalAlignment="Left" Margin="10,88,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="label6" Content="speichern unter" HorizontalAlignment="Left" Margin="10,114,0,0" VerticalAlignment="Top" Width="154"/>
+        <CheckBox x:Name="checkBoxShortcut" Content="Verknüpfung auf Desktop erstellen" HorizontalAlignment="Left" Margin="10,147,0,0" VerticalAlignment="Top" IsChecked= "{Binding Path=ShortCut, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"  />
+
+    </Grid>
+</Window>
