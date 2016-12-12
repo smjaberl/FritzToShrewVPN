@@ -31,11 +31,9 @@ Die VPN Verbindungsdaten zur Fritzbox müssen bekannt sein
 
 #### Installation
 
-Derzeit steht noch kein kompiliertes Programm zum download bereit.
+[Download FritzToShrewVON](https://github.com/smjaberl/FritzToShrewVPN/archive/publish.zip)
 
-Das Projekt muss demzufolge herunter geladen, mit Microsoft Visual Studio 2015
-geöffnet und kompiliert werden.
-
+setup.exe welche in dem zip liegt ausführen
  
 
 ### Anwendung
