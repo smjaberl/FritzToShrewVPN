@@ -1,0 +1,65 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<asmv1:assembly xsi:schemaLocation="urn:schemas-microsoft-com:asm.v1 assembly.adaptive.xsd" manifestVersion="1.0" xmlns:asmv1="urn:schemas-microsoft-com:asm.v1" xmlns="urn:schemas-microsoft-com:asm.v2" xmlns:asmv2="urn:schemas-microsoft-com:asm.v2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:co.v1="urn:schemas-microsoft-com:clickonce.v1" xmlns:asmv3="urn:schemas-microsoft-com:asm.v3" xmlns:dsig="http://www.w3.org/2000/09/xmldsig#" xmlns:co.v2="urn:schemas-microsoft-com:clickonce.v2">
+  <asmv1:assemblyIdentity name="FritzToShrewVPN.exe" version="1.0.0.1" publicKeyToken="893c19c9dc75e194" language="neutral" processorArchitecture="msil" type="win32" />
+  <application />
+  <entryPoint>
+    <assemblyIdentity name="FritzToShrewVPN" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
+    <commandLine file="FritzToShrewVPN.exe" parameters="" />
+  </entryPoint>
+  <trustInfo>
+    <security>
+      <applicationRequestMinimum>
+        <PermissionSet Unrestricted="true" ID="Custom" SameSite="site" />
+        <defaultAssemblyRequest permissionSetReference="Custom" />
+      </applicationRequestMinimum>
+      <requestedPrivileges xmlns="urn:schemas-microsoft-com:asm.v3">
+        <!--
+          UAC-Manifestoptionen
+          Wenn Sie die Zugangsebene für das Windows-Benutzerkonto ändern möchten, ersetzen Sie den 
+          requestedExecutionLevel-Knoten durch eines der folgenden Elemente.
+
+        <requestedExecutionLevel  level="asInvoker" uiAccess="false" />
+        <requestedExecutionLevel  level="requireAdministrator" uiAccess="false" />
+        <requestedExecutionLevel  level="highestAvailable" uiAccess="false" />
+
+         Löschen Sie den requestedExecutionLevel-Knoten, wenn Sie 
+         zum Gewährleisten der Abwärtskompatibilität die Datei- und Registrierungsvirtualisierung verwenden möchten.
+    -->
+        <requestedExecutionLevel level="asInvoker" uiAccess="false" />
+      </requestedPrivileges>
+    </security>
+  </trustInfo>
+  <dependency>
+    <dependentOS>
+      <osVersionInfo>
+        <os majorVersion="5" minorVersion="1" buildNumber="2600" servicePackMajor="0" />
+      </osVersionInfo>
+    </dependentOS>
+  </dependency>
+  <dependency>
+    <dependentAssembly dependencyType="preRequisite" allowDelayedBinding="true">
+      <assemblyIdentity name="Microsoft.Windows.CommonLanguageRuntime" version="4.0.30319.0" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="FritzToShrewVPN.exe" size="21936">
+      <assemblyIdentity name="FritzToShrewVPN" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
+      <hash>
+        <dsig:Transforms>
+          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+        </dsig:Transforms>
+        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+        <dsig:DigestValue>GN1UB1zO3g1Yk5ODzi42JwoivgEjIiQImGmpB3hW0nM=</dsig:DigestValue>
+      </hash>
+    </dependentAssembly>
+  </dependency>
+  <file name="FritzToShrewVPN.exe.config" size="189">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+      <dsig:DigestValue>rl5/qDc7Jz+tB+BIbOv9iMGPlRe6YJwrjmU09dnlPcs=</dsig:DigestValue>
+    </hash>
+  </file>
+<publisherIdentity name="CN=JHB-THINK\jhb" issuerKeyHash="aad86b59d1e9d8e1b41ab8de7aa790060f35986d" /><Signature Id="StrongNameSignature" xmlns="http://www.w3.org/2000/09/xmldsig#"><SignedInfo><CanonicalizationMethod Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#" /><SignatureMethod Algorithm="http://www.w3.org/2000/09/xmldsig#rsa-sha256" /><Reference URI=""><Transforms><Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature" /><Transform Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#" /></Transforms><DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" /><DigestValue>gnJgADfb1lV3+qrGqdCS2/87BHGkTYAP4YMrPnXraDo=</DigestValue></Reference></SignedInfo><SignatureValue>nkIduazEaspdKjaI3rDnPzN0exfYnoIZvGov54KmZrjEGAAnI7gz5uyYGIsY5Zg6PeybJSl3eWPTCevj/edbJVwA2s4iGrNpJ1NkEBuDFb/MMep+XW65IjQlEWo9L1YsaOx9zch8viXZH4Cpd73mtnjI2+4RF1q5ZSmiY9aVnyc=</SignatureValue><KeyInfo Id="StrongNameKeyInfo"><KeyValue><RSAKeyValue><Modulus>siTWBFqRvvEsxHrVzTkiO3oo2LwbSXEnryrgUud7ZQ2vuPgjj+z9JVcTOfSyLgRIa8n5edyBqj/OchHLlG8Q/v7ObdElSW7QRUZokR7RI37i156pFYtpC95Q23SY2mnGF7DL3QLA5wSpo7XSu28cSfkXAghJ09CGRcQv2Ez/xc8=</Modulus><Exponent>AQAB</Exponent></RSAKeyValue></KeyValue><msrel:RelData xmlns:msrel="http://schemas.microsoft.com/windows/rel/2005/reldata"><r:license xmlns:r="urn:mpeg:mpeg21:2003:01-REL-R-NS" xmlns:as="http://schemas.microsoft.com/windows/pki/2005/Authenticode"><r:grant><as:ManifestInformation Hash="3a68eb753e2b83e10f804da471043bffdb92d0a9c6aafa7755d6db3700607282" Description="" Url=""><as:assemblyIdentity name="FritzToShrewVPN.exe" version="1.0.0.1" publicKeyToken="893c19c9dc75e194" language="neutral" processorArchitecture="msil" type="win32" /></as:ManifestInformation><as:SignedBy /><as:AuthenticodePublisher><as:X509SubjectName>CN=JHB-THINK\jhb</as:X509SubjectName></as:AuthenticodePublisher></r:grant><r:issuer><Signature Id="AuthenticodeSignature" xmlns="http://www.w3.org/2000/09/xmldsig#"><SignedInfo><CanonicalizationMethod Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#" /><SignatureMethod Algorithm="http://www.w3.org/2000/09/xmldsig#rsa-sha256" /><Reference URI=""><Transforms><Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature" /><Transform Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#" /></Transforms><DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" /><DigestValue>U93XUwvNlGtT8QzoUXH35gTWFXrHmagSlOqDaLf71JQ=</DigestValue></Reference></SignedInfo><SignatureValue>JAOeO2MpJf0T3vrQg0ZiVPUP9t8BM2yEi2Do3orbB8zeFBW79oQd3N/OEMq6hzvo+iAJcUbh+1lopKD0KjR9M6jWNbYlqO2JTLvdkopSdEyvmzz4MYMldN2oAQVROKWjvd8N4jBmDhgEG+DE4SI5Ea0iJqxUnzycCWVSid7xRWE=</SignatureValue><KeyInfo><KeyValue><RSAKeyValue><Modulus>siTWBFqRvvEsxHrVzTkiO3oo2LwbSXEnryrgUud7ZQ2vuPgjj+z9JVcTOfSyLgRIa8n5edyBqj/OchHLlG8Q/v7ObdElSW7QRUZokR7RI37i156pFYtpC95Q23SY2mnGF7DL3QLA5wSpo7XSu28cSfkXAghJ09CGRcQv2Ez/xc8=</Modulus><Exponent>AQAB</Exponent></RSAKeyValue></KeyValue><X509Data><X509Certificate>MIIBzTCCATagAwIBAgIQKiob2J1VR7dCODpXQrnMHDANBgkqhkiG9w0BAQsFADAlMSMwIQYDVQQDHhoASgBIAEIALQBUAEgASQBOAEsAXABqAGgAYjAeFw0xNjEyMTExNzAzNTFaFw0xNzEyMTEyMzAzNTFaMCUxIzAhBgNVBAMeGgBKAEgAQgAtAFQASABJAE4ASwBcAGoAaABiMIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQCyJNYEWpG+8SzEetXNOSI7eijYvBtJcSevKuBS53tlDa+4+COP7P0lVxM59LIuBEhryfl53IGqP85yEcuUbxD+/s5t0SVJbtBFRmiRHtEjfuLXnqkVi2kL3lDbdJjaacYXsMvdAsDnBKmjtdK7bxxJ+RcCCEnT0IZFxC/YTP/FzwIDAQABMA0GCSqGSIb3DQEBCwUAA4GBAAhLtNuvJ1DU3jPThNNHL2sMcuSg59JezQD5ezrurAlpkQmpYNT0Sr6/Gi0aNYC2FOl+s0AEluW8BzHPZp08tu0+5Fi5dIDKM7CBJGXiUoM3TwR0m0J4ekExMPlDkKTtybpNrFBuO6RSvEAbtQEhuS0G2enyII/Y9rNNikhAfpLz</X509Certificate></X509Data></KeyInfo></Signature></r:issuer></r:license></msrel:RelData></KeyInfo></Signature></asmv1:assembly>
