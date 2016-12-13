@@ -20,7 +20,7 @@ FritzToShrewVPN deutlich einfacher.
 
 ### Wie nutzt man FritzToShrewsoftVPN
 
-#### Vorrausetzungen
+#### Vorausetzungen
 
 ShrewSoftVPN 2.2.2 muss installiert sein [Download Seite von
 ShrewSoft](https://www.shrew.net/download)
@@ -31,9 +31,9 @@ Die VPN Verbindungsdaten zur Fritzbox müssen bekannt sein
 
 #### Installation
 
-[Download FritzToShrewVON](https://github.com/smjaberl/FritzToShrewVPN/archive/publish.zip)
+[Download FritzToShrewVPN](https://github.com/smjaberl/FritzToShrewVPN/archive/publish.zip)
 
-setup.exe welche in dem zip liegt ausführen
+setup.exe welche in dem zip liegt, ausführen
  
 
 ### Anwendung
@@ -60,19 +60,24 @@ setup.exe welche in dem zip liegt ausführen
 \* Vorhandene Verbindungen unter C:\\Benutzer\\\<name\>\\AppData\\Local\\Shrew
 Soft VPN\\sites wurden eingelesen
 
-\* Je nach Auswahl wurde eine neue Verbindung angelegt, oder eine Vorhandene
+\* Je nach Auswahl wurde eine neue Verbindung angelegt oder eine Vorhandene
 bearbeitet bzw. kopiert.
 
-\* Diese wurde in dem oben angegebenem Pfad gespeichert.
+\* Diese wurde in dem oben angegebenen Pfad gespeichert.
 
-\* Je nach gesetztem Harken wurde ein Shortcut auf dem Desktop erstellt.
+\* Je nach gesetztem Haken wurde ein Shortcut auf dem Desktop erstellt.
 
  
 
 ### Fragen, Anregungen und Feedback
 
-... nehme ich gern unter folgenden E-Mail Adresse entgegen: <a href="mailto:FritzToShrewVPN@HaschkeBerlin.de"> Jan Hendrik Berlin, FritzToShrewVPN@HaschkeBerlin.de</a>
+... nehme ich gern unter der folgenden E-Mail Adresse entgegen: <a href="mailto:FritzToShrewVPN@HaschkeBerlin.de"> Jan Hendrik Berlin, FritzToShrewVPN@HaschkeBerlin.de</a>
 
+### Dieses Projekt ist nicht verwandt oder verschwägert mit:
+
+https://fritztoshrew.codeplex.com/
+
+Eine Google-Suche nach "FritzToShrewsoftVPN" brachte mich zu dem Projekt fritztoshrew. Dies habe ich erst nach der Veröffentlichung bemerkt. 
 
 Why this page is written in German.
 -----------------------------------
