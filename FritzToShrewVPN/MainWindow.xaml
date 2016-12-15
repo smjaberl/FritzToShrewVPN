@@ -30,11 +30,22 @@
         <Label x:Name="label3" Content="für FritzBox" HorizontalAlignment="Left" Margin="146,185,0,0" VerticalAlignment="Top" Height="26" Width="70"/>
         <Label x:Name="label4" Content="der FritBox" HorizontalAlignment="Left" Margin="10,186,0,0" VerticalAlignment="Top" Height="26" Width="67"/>
         <Button x:Name="buttonSave" Content="Speichern" HorizontalAlignment="Left" Margin="57,261,0,0" VerticalAlignment="Top" Width="75" HorizontalContentAlignment="Center" Click="buttonSave_Click" Height="20"/>
-        <Button x:Name="buttonSaveExit" Content="Speichern und Beenden" HorizontalAlignment="Left" Margin="146,261,0,0" VerticalAlignment="Top" Width="134" HorizontalContentAlignment="Center" Click="buttonSaveExit_Click" Height="20" Grid.ColumnSpan="2"/>
+        <Button x:Name="buttonSaveExit" Content="Speichern und Beenden" HorizontalAlignment="Left" Margin="146,261,0,29" Width="134" HorizontalContentAlignment="Center" Click="buttonSaveExit_Click" Grid.ColumnSpan="2"/>
         <Button x:Name="buttonExit" Content="Beenden" HorizontalAlignment="Left" Margin="56,261,0,0" VerticalAlignment="Top" Width="75" HorizontalContentAlignment="Center" Click="buttonExit_Click" Height="20" Grid.Column="1"/>
         <Label x:Name="label5" Content="vorhandene Verbindung" HorizontalAlignment="Left" Margin="10,88,0,0" VerticalAlignment="Top"/>
         <Label x:Name="label6" Content="speichern unter" HorizontalAlignment="Left" Margin="10,114,0,0" VerticalAlignment="Top" Width="154"/>
         <CheckBox x:Name="checkBoxShortcut" Content="Verknüpfung auf Desktop erstellen" HorizontalAlignment="Left" Margin="10,147,0,0" VerticalAlignment="Top" IsChecked= "{Binding Path=ShortCut, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"  />
+        <Label x:Name="label7" Content="© 20016 Jan Hendrik Berlin, veröffentlicht unter GPL 3.0" HorizontalAlignment="Left" Margin="139,14,-14,-40" VerticalAlignment="Center" Width="314" Height="26" RenderTransformOrigin="0.887,0.607" Grid.ColumnSpan="2" Grid.Row="1">
+            <Label.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="90"/>
+                    <TranslateTransform Y="-60.416"/>
+                </TransformGroup>
+            </Label.RenderTransform>
+        </Label>
+        <Label x:Name="label8" Content="https://github.com/smjaberl/FritzToShrewVPN" HorizontalAlignment="Left" Margin="81,279,0,0" VerticalAlignment="Top" Grid.ColumnSpan="2" Width="291"/>
 
     </Grid>
 </Window>
