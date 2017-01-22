@@ -12,6 +12,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Text;
@@ -23,8 +24,17 @@ namespace FritzToShrewVPN
     {
         public DataVPN()
         {
-            conName = "FritzBox";
+            /*conName.Add("FritzBox");
+            user.Add("fritzuser");
+            psk.Add("krautsalat");
+            check.Add(true);*/
+
+            theUserDataObjects = new ObservableCollection<UserDataObject>();
+            theUserDataObjects.Add(new UserDataObject(true, "fritzuser", "krautsalat", "user@host"));
             shortCut = true;
+            fbpasswd = "";
+            fbuser = "";
+            localbox = "fritz.box";
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
@@ -36,17 +46,7 @@ namespace FritzToShrewVPN
             }
         }
 
-
-        private string conName;
-        public string ConName
-        {
-            get { return conName; }
-            set
-            {
-                conName = value;
-                Notify("conName");
-            }
-        }
+        public ObservableCollection<UserDataObject> theUserDataObjects { get; private set; }
 
         private string host;
         public string Host
@@ -59,27 +59,39 @@ namespace FritzToShrewVPN
             }
         }
 
-        private string user;
-        public string User
+        private string localbox;
+        public string LocalBox
         {
-            get { return user; }
+            get { return localbox; }
             set
             {
-                user = value;
-                Notify("user");
+                localbox = value;
+                Notify("localbox");
             }
         }
 
-        private string psk;
-        public string PSK
+        private string fbuser;
+        public string FBUser
         {
-            get { return psk; }
+            get { return fbuser; }
             set
             {
-                psk = value;
-                Notify("psk");
+                fbuser = value;
+                Notify("fbuser");
             }
         }
+
+        private string fbpasswd;
+        public string FBPasswd
+        {
+            get { return fbpasswd; }
+            set
+            {
+                fbpasswd = value;
+                Notify("fbpasswd");
+            }
+        }
+
         private bool newCon;
         public bool NewCon
         {
@@ -98,6 +110,16 @@ namespace FritzToShrewVPN
             {
                 shortCut = value;
                 Notify("shortCut");
+            }
+        }
+        private string selectedCon;
+        public string SelectedCon
+        {
+            get { return selectedCon; }
+            set
+            {
+                selectedCon = value;
+                Notify("selectedCon");
             }
         }
     }

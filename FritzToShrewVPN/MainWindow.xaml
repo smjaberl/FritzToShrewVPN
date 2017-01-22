@@ -4,48 +4,75 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:FritzToShrewVPN"
-         x:Class="FritzToShrewVPN.MainWindow"
+        x:Class="FritzToShrewVPN.MainWindow"
         mc:Ignorable="d"
-        Title="FritzToShrewsoftVPN" Height="339.755" Width="453.756" ShowInTaskbar="False" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" HorizontalAlignment="Left" VerticalAlignment="Top">
-    <Grid Margin="10,0,0,1" HorizontalAlignment="Left" Width="439">
+        Title="FritzToShrewsoftVPN" Height="336.693" Width="731.66" ShowInTaskbar="True" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" HorizontalAlignment="Left" VerticalAlignment="Top">
+    <Window.DataContext>
+        <local:DataVPN/>
+    </Window.DataContext>
+    <Grid Margin="10,0,0,1">
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="241*"/>
-            <ColumnDefinition Width="198*"/>
+            <ColumnDefinition Width="320"/>
+            <ColumnDefinition Width="223"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="310"/>
-            <RowDefinition Height="0*"/>
+            <RowDefinition Height="288"/>
         </Grid.RowDefinitions>
-        <TextBox x:Name="textBoxConnection" HorizontalAlignment="Left" Height="23" Margin="157,119,0,0" TextWrapping="Wrap" Text= "{Binding Path=ConName, Mode=TwoWay}" VerticalAlignment="Top" Width="120" RenderTransformOrigin="0.531,2.584" Grid.ColumnSpan="2"></TextBox>
-        <ComboBox x:Name="comboBoxConnection" HorizontalAlignment="Left" Margin="157,92,0,0" VerticalAlignment="Top" Width="120" SelectionChanged="comboBoxConnection_SelectionChanged" Height="22" Grid.ColumnSpan="2"/>
-        <RadioButton x:Name="radioButtonNew" Content="neue Verbindung anlegen" HorizontalAlignment="Left" Margin="10,62,0,0" VerticalAlignment="Top" GroupName="NewEdit" Checked="radioButtonNew_Checked" Height="15" Width="156" IsChecked="True"/>
-        <RadioButton x:Name="radioButtonEdit" Content="vorhandene Verbindung bearbeiten" HorizontalAlignment="Left" Margin="10,42,0,0" VerticalAlignment="Top" GroupName="NewEdit" Checked="radioButtonEdit_Checked" Height="15" Width="207"/>
-        <RadioButton x:Name="radioButtonCopy" Content="Kopie der gewählten Verbindung erstellen" HorizontalAlignment="Left" Margin="10,22,0,0" VerticalAlignment="Top" GroupName="NewEdit" Checked="radioButtonCopy_Checked" Height="15" Width="241" Grid.ColumnSpan="2"/>
-        <TextBox x:Name="textBoxHost" HorizontalAlignment="Left" Height="23" Margin="10,212,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="131" Text= "{Binding Path=Host, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"></TextBox>
-        <TextBox x:Name="textBoxUser" HorizontalAlignment="Left" Height="23" Margin="146,212,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="131" Text= "{Binding Path=User, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Grid.ColumnSpan="2"></TextBox>
-        <TextBox x:Name="textBoxPSK" HorizontalAlignment="Left" Height="23" Margin="41,211,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="131" Text= "{Binding Path=PSK, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Grid.Column="1"></TextBox>
-        <Label x:Name="label" Content="IP oder Domainname" HorizontalAlignment="Left" Margin="10,167,0,0" VerticalAlignment="Top" Height="26" Width="122"/>
-        <Label x:Name="label1" Content="Benutzername" HorizontalAlignment="Left" Margin="146,167,0,0" VerticalAlignment="Top" Height="28" Width="86"/>
-        <Label x:Name="label2" Content="Pre Shared Secret" HorizontalAlignment="Left" Margin="41,185,0,0" VerticalAlignment="Top" Height="26" Width="103" Grid.Column="1"/>
-        <Label x:Name="label3" Content="für FritzBox" HorizontalAlignment="Left" Margin="146,185,0,0" VerticalAlignment="Top" Height="26" Width="70"/>
-        <Label x:Name="label4" Content="der FritBox" HorizontalAlignment="Left" Margin="10,186,0,0" VerticalAlignment="Top" Height="26" Width="67"/>
-        <Button x:Name="buttonSave" Content="Speichern" HorizontalAlignment="Left" Margin="57,261,0,0" VerticalAlignment="Top" Width="75" HorizontalContentAlignment="Center" Click="buttonSave_Click" Height="20"/>
-        <Button x:Name="buttonSaveExit" Content="Speichern und Beenden" HorizontalAlignment="Left" Margin="146,261,0,29" Width="134" HorizontalContentAlignment="Center" Click="buttonSaveExit_Click" Grid.ColumnSpan="2"/>
-        <Button x:Name="buttonExit" Content="Beenden" HorizontalAlignment="Left" Margin="56,261,0,0" VerticalAlignment="Top" Width="75" HorizontalContentAlignment="Center" Click="buttonExit_Click" Height="20" Grid.Column="1"/>
-        <Label x:Name="label5" Content="vorhandene Verbindung" HorizontalAlignment="Left" Margin="10,88,0,0" VerticalAlignment="Top"/>
-        <Label x:Name="label6" Content="speichern unter" HorizontalAlignment="Left" Margin="10,114,0,0" VerticalAlignment="Top" Width="154"/>
-        <CheckBox x:Name="checkBoxShortcut" Content="Verknüpfung auf Desktop erstellen" HorizontalAlignment="Left" Margin="10,147,0,0" VerticalAlignment="Top" IsChecked= "{Binding Path=ShortCut, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"  />
-        <Label x:Name="label7" Content="© 20016 Jan Hendrik Berlin, veröffentlicht unter GPL 3.0" HorizontalAlignment="Left" Margin="139,14,-14,-40" VerticalAlignment="Center" Width="314" Height="26" RenderTransformOrigin="0.887,0.607" Grid.ColumnSpan="2" Grid.Row="1">
+        <ComboBox x:Name="comboBoxConnection" HorizontalAlignment="Left" Margin="0,165,0,0" VerticalAlignment="Top" Width="130" SelectionChanged="comboBoxConnection_SelectionChanged" Height="22" SelectedValue="{Binding Path=SelectedCon, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"/>
+        <TextBox x:Name="textBoxHost" HorizontalAlignment="Left" Height="23" Margin="203,198,-144,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="165" Text= "{Binding Path=Host, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Grid.Column="1"/>
+        <Label x:Name="label4" Content="Internetadresse der FritBox" HorizontalAlignment="Left" Margin="10,198,0,0" VerticalAlignment="Top" Height="26" Width="156" Grid.Column="1"/>
+        <Button x:Name="buttonSave" Content="Speichern" Margin="10,0,79,-9" HorizontalContentAlignment="Center" Click="buttonSave_Click" Height="25" VerticalAlignment="Bottom" Grid.Column="1" Width="135"/>
+        <Button x:Name="buttonExit" Content="Beenden" Margin="181,0,10,60" HorizontalContentAlignment="Center" Click="buttonExit_Click" RenderTransformOrigin="0.281,0.626" Height="25" VerticalAlignment="Bottom" Width="130"/>
+        <Label x:Name="label5" Content="vorhandene Verbindung" HorizontalAlignment="Left" Margin="135,165,0,0" VerticalAlignment="Top" Height="26" Width="138" RenderTransformOrigin="-0.58,0.692"/>
+        <CheckBox x:Name="checkBoxShortcut" Content="Verknüpfung auf Desktop erstellen" Margin="152,282,-144,-9" IsChecked= "{Binding Path=ShortCut, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Grid.Column="1"  />
+        <Label x:Name="label7" Content="© 20017 Jan Hendrik Berlin, veröffentlicht unter GPL 3.0" HorizontalAlignment="Left" Margin="169,0,-255,17" Width="310" RenderTransformOrigin="0.5,0.5"  Height="26" VerticalAlignment="Bottom" Grid.Column="1">
             <Label.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform/>
                     <SkewTransform/>
                     <RotateTransform Angle="90"/>
-                    <TranslateTransform Y="-60.416"/>
+                    <TranslateTransform Y="-105.722" X="56.862"/>
                 </TransformGroup>
             </Label.RenderTransform>
         </Label>
-        <Label x:Name="label8" Content="https://github.com/smjaberl/FritzToShrewVPN" HorizontalAlignment="Left" Margin="81,279,0,0" VerticalAlignment="Top" Grid.ColumnSpan="2" Width="291"/>
-
+        <DataGrid AutoGenerateColumns="False" 
+          Height="183" 
+          HorizontalAlignment="Left" 
+          Name="dataGrid1" 
+          VerticalAlignment="Top" 
+          Width="358" Margin="10,10,-144,0" 
+          CanUserAddRows="False" CanUserSortColumns="False" CanUserResizeColumns="True" CanUserReorderColumns="False" 
+          ItemsSource="{Binding theUserDataObjects}" Grid.Column="1">
+            <DataGrid.Columns >
+                <DataGridCheckBoxColumn Header = "" Binding="{Binding Check, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" MinWidth="50" />
+                <DataGridTextColumn Header = "Benutzer" Binding="{Binding User, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" MinWidth="50" />
+                <DataGridTextColumn Header = "PSK" Binding="{Binding PSK, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" MinWidth="50" />
+                <DataGridTextColumn Header = "Name der Verbindung" Binding="{Binding ConName, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" MinWidth="50" />
+            </DataGrid.Columns>
+        </DataGrid>
+        <TextBox x:Name="textBoxLocalBox" Height="25" Margin="0,10,191,0" TextWrapping="Wrap" Text="{Binding Path=LocalBox, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" VerticalAlignment="Top" Width="130"/>
+        <Button x:Name="buttonLoad"  HorizontalAlignment="Left" Height="50" Margin="0,99,0,0" VerticalAlignment="Top" Width="130" Click="buttonLoad_Click" Cursor="AppStarting">
+            <TextBlock TextAlignment="Center">
+                    Lade Daten aus<LineBreak/>FritzBox
+            </TextBlock>
+        </Button>
+        <TextBlock x:Name="textBlock" HorizontalAlignment="Left" Height="26" Margin="0,281,0,-18" TextWrapping="Wrap" VerticalAlignment="Top" Width="250">
+                <Hyperlink NavigateUri="https://github.com/smjaberl/FritzToShrewVPN" RequestNavigate="Hyperlink_RequestNavigate">
+                    https://github.com/smjaberl/FritzToShrewVPN
+                </Hyperlink>
+        </TextBlock>
+        <Label x:Name="label" Content="LAN IP oder Adresse der FritzBox" HorizontalAlignment="Left" Margin="131,10,0,0" VerticalAlignment="Top" Width="191" Height="25" Grid.ColumnSpan="2"/>
+        <TextBox x:Name="textBoxUser" HorizontalAlignment="Left" Height="25" Margin="0,40,0,0" TextWrapping="Wrap" Text ="{Binding Path=FBUser, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" VerticalAlignment="Top" Width="130" IsEnabled="False"/>
+        <CheckBox x:Name="checkBoxUserLogin" Content="mit Benutzernamen anmelden" Height="25" Margin="135,45,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.877,1.04" HorizontalAlignment="Left" Unchecked="checkBoxUserLogin_UnChecked" Checked="checkBoxUserLogin_Checked"/>
+        <CheckBox x:Name="checkBoxPasswordVisible" Content="FritzBox Passwort sichtbar" HorizontalAlignment="Left" Margin="135,74,0,0" VerticalAlignment="Top" Width="176" Height="25" Checked="checkBoxPasswordVisible_Checked" Unchecked="checkBoxPasswordVisible_UnChecked"/>
+        <Button x:Name="buttonLoadExistingCon" HorizontalAlignment="Left" Margin="0,192,0,0" VerticalAlignment="Top" Width="130" Height="50" Click="buttonLoadExistingCon_Click">
+            <TextBlock TextAlignment="Center">
+        Lade aus gewählter<LineBreak/>Verbindung
+            </TextBlock>
+        </Button>
+        <RadioButton x:Name="radioButtonStandard" Content="Standard Einstellungn nutzen" Grid.Column="1" HorizontalAlignment="Left" Margin="10,230,0,0" VerticalAlignment="Top" GroupName="RadioButtengroup" IsChecked="True"/>
+        <RadioButton x:Name="radioButtonVerbindungen" Content="Einstellungen aus vorhandener Verbindung" Grid.Column="1" HorizontalAlignment="Left" Margin="10,250,-80,0" VerticalAlignment="Top" Width="294" GroupName="RadioButtengroup"/>
+        <TextBox x:Name="textBoxPassword" HorizontalAlignment="Left" Height="25" Margin="0,69,0,0" TextWrapping="Wrap" Text ="{Binding Path=FBPasswd, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" VerticalAlignment="Top" Width="130" Visibility="Hidden"/>
+        <PasswordBox x:Name="passwordBox" HorizontalAlignment="Left" Margin="0,69,0,0" Height="25" VerticalAlignment="Top" Width="130"/>
     </Grid>
 </Window>

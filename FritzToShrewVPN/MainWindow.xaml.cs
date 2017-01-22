@@ -11,6 +11,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -24,6 +25,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
+
 namespace FritzToShrewVPN
 {
     /// <summary>
@@ -34,20 +36,13 @@ namespace FritzToShrewVPN
         
         private static DataVPN theDataVPN = new DataVPN();
         private shrewHandler theShrewHandler = new shrewHandler(theDataVPN);
+        private FritzConnector theFritzConector = new FritzConnector(theDataVPN);
 
         public MainWindow()
         {
             InitializeComponent();
             foreach(var I in theShrewHandler.VPNs)
                 comboBoxConnection.Items.Add(I);
-            comboBoxConnection.SelectedIndex = 0;
-            if (comboBoxConnection.Items.Count == 0)
-            {
-                radioButtonCopy.IsEnabled = false;
-                radioButtonEdit.IsEnabled = false;
-            }
-            
-            
             this.DataContext = theDataVPN;
         }
 
@@ -69,58 +64,69 @@ namespace FritzToShrewVPN
 
         private void Save()
         {
-            bool newcon = Convert.ToBoolean(radioButtonNew.IsChecked);
-            bool copy = Convert.ToBoolean(radioButtonCopy.IsChecked);
+            bool stdcon = Convert.ToBoolean(radioButtonStandard.IsChecked);
 
-
-            if (theShrewHandler.make(newcon, copy))
-                MessageBox.Show("Die VPN-Verbindung " + theDataVPN.ConName + " wurde erfolgreich erstellt.",
+            if (theShrewHandler.make(stdcon))
+                MessageBox.Show("Die VPN-Verbindung(en) wurde(n) erfolgreich erstellt.",
                             "Herzlichen Glückwunsch",
                             MessageBoxButton.OK,
                             MessageBoxImage.Information
                             );
             else
-                MessageBox.Show("Die VPN-Verbindung " + theDataVPN.ConName + " konnte nicht erstellt werden. \nError Code: 42.001",
+                MessageBox.Show("Die VPN-Verbindung(en) konnte(n) nicht erstellt werden. \nError Code: 42.001",
                             "Error",
                             MessageBoxButton.OK,
                             MessageBoxImage.Error
                             );
+        }
 
+        private void buttonLoad_Click(object sender, RoutedEventArgs e)
+        {
+            if (passwordBox.Visibility == Visibility.Visible )
+                theDataVPN.FBPasswd = passwordBox.Password;
+            theFritzConector.loadFromBox();
+        }
+
+        private void Hyperlink_RequestNavigate(object sender, RequestNavigateEventArgs e)
+        {
+            Process.Start(new ProcessStartInfo(e.Uri.AbsoluteUri));
+            e.Handled = true;
+        }
+
+        private void checkBoxUserLogin_Checked(object sender, RoutedEventArgs e)
+        {
+            checkBoxPasswordVisible.Content = "Benutzer Passwort sichtbar";
+            textBoxUser.IsEnabled = true;
+        }
+        private void checkBoxUserLogin_UnChecked(object sender, RoutedEventArgs e)
+        {
+            checkBoxPasswordVisible.Content = "FritzBox Passwort sichtbar";
+            textBoxUser.Text = "";
+            textBoxUser.IsEnabled = false;
+        }
+
+        private void buttonLoadExistingCon_Click(object sender, RoutedEventArgs e)
+        {
+            theDataVPN.theUserDataObjects.Add(theShrewHandler.load());
         }
 
         private void comboBoxConnection_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            if (comboBoxConnection.IsEnabled)
-            {
-                theDataVPN.ConName = comboBoxConnection.SelectedItem.ToString();
-                theShrewHandler.load();
-                if (Convert.ToBoolean(radioButtonCopy.IsChecked))
-                    theDataVPN.ConName += @" - Kopie";
-            }
+
         }
 
-        private void radioButtonNew_Checked(object sender, RoutedEventArgs e)
+        private void checkBoxPasswordVisible_Checked(object sender, RoutedEventArgs e)
         {
-            comboBoxConnection.IsEnabled = false;
-            comboBoxConnection.Text = "";
-            textBoxConnection.IsEnabled = true;
-            theDataVPN.ConName = "FritzBox";
-            theDataVPN.Host = "";
-            theDataVPN.User = "";
-            theDataVPN.PSK = "";
+            passwordBox.Visibility = Visibility.Hidden;
+            textBoxPassword.Visibility = Visibility.Visible;
+            textBoxPassword.Text = passwordBox.Password;
         }
 
-        private void radioButtonEdit_Checked(object sender, RoutedEventArgs e)
+        private void checkBoxPasswordVisible_UnChecked(object sender, RoutedEventArgs e)
         {
-            comboBoxConnection.IsEnabled = true;
-            textBoxConnection.IsEnabled = false;
-        }
-
-        private void radioButtonCopy_Checked(object sender, RoutedEventArgs e)
-        {
-            comboBoxConnection.IsEnabled = true;
-            textBoxConnection.IsEnabled = true;
-            theDataVPN.ConName += @" - Kopie";
+            textBoxPassword.Visibility = Visibility.Hidden;
+            passwordBox.Visibility = Visibility.Visible; 
+            passwordBox.Password = textBoxPassword.Text;
         }
     }
 }

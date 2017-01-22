@@ -17,6 +17,7 @@ using System.Linq;
 using System.Text;
 using System.Windows;
 
+
 namespace FritzToShrewVPN
 {
     class shrewHandler
@@ -30,7 +31,7 @@ namespace FritzToShrewVPN
         {
             theData = theDa;
 
-            // read shre config files
+            // read shrew config files
             if (Directory.Exists(ShrewSitesDir))
             {
                 DirectoryInfo shrewDirectory = new System.IO.DirectoryInfo(ShrewSitesDir);
@@ -38,7 +39,7 @@ namespace FritzToShrewVPN
                 {
                     VPNs.Add(f.Name);
                 }
-            }            
+            }
         }
 
         public List<String> VPNs = new List<string>();
@@ -47,7 +48,7 @@ namespace FritzToShrewVPN
         private string ShrewSitesDir = Environment.GetEnvironmentVariable("LOCALAPPDATA") + @"\Shrew Soft VPN\sites";
         private string DesktopPath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
 
-        public bool make(bool newFile, bool copy)
+        public bool make(bool newFile)
         {
 
             string Config;
@@ -62,109 +63,126 @@ namespace FritzToShrewVPN
             }
             else
             {
-                Config = read();  
+                Config = read();
             }
             //replace operation in Config
-            ConfArray = Config.Split('\n');
-            int i = 0;
-            foreach (string line in ConfArray)
+
+            //---------------------------------------------------------------------------------------------------------------------------------------------------------
+            foreach (UserDataObject obj in theData.theUserDataObjects)
             {
-                if (line.StartsWith(@"s:network-host:"))
-                    ConfArray[i] = @"s:network-host:" + theData.Host;
-                if (line.StartsWith(@"s:ident-client-data:"))
-                    ConfArray[i] = @"s:ident-client-data:" + theData.User;
-                if (line.StartsWith(@"b:auth-mutual-psk:"))
-                    ConfArray[i] = @"b:auth-mutual-psk:" + Base64Encode(theData.PSK);
-                i++;
+                if (obj.Check)
+                {
+                    ConfArray = Config.Split('\n');
+                    int i = 0;
+                    foreach (string line in ConfArray)
+                    {
+                        if (line.StartsWith(@"s:network-host:"))
+                            ConfArray[i] = @"s:network-host:" + theData.Host;
+                        if (line.StartsWith(@"s:ident-client-data:"))
+                            ConfArray[i] = @"s:ident-client-data:" + obj.User;
+                        if (line.StartsWith(@"b:auth-mutual-psk:"))
+                            ConfArray[i] = @"b:auth-mutual-psk:" + Base64Encode(obj.PSK); i++;
+                    }
+                    Config = string.Join("\n", ConfArray.ToArray());
+
+                    //save vpn connection
+
+                    bool cancel = false;
+
+                    // if file exists and the option to change the file is not choosen, attach timestamp
+                    if (File.Exists(ShrewSitesDir + @"\" + obj.ConName))
+                    {
+                        var result = MessageBox.Show(ShrewSitesDir + @"\" + obj.ConName + "existiert schon, möchtest du die Datei überschreiben?",
+                        @"Fehler",
+                        MessageBoxButton.YesNoCancel,
+                        MessageBoxImage.Question
+                        );
+
+                        switch(result)
+                        {
+                            case MessageBoxResult.Yes:  break;
+                            case MessageBoxResult.Cancel: cancel= true; break;    //Cancel all Operations
+                            case MessageBoxResult.No: continue;       //Cancel Operations für one Connection
+                        }
+                        if (cancel) break;
+
+                        try
+                        {
+                           File.WriteAllText(ShrewSitesDir + @"\" + obj.ConName, Config);
+                        }
+                        catch (Exception ex)
+                        {
+                            MessageBox.Show(ex.Message.ToString(),
+                            @"Fehler",
+                            MessageBoxButton.OK,
+                            MessageBoxImage.Error
+                            );
+                            return false;
+                        }
+
+
+                        // wirte the shortcut to the deskop
+                        if (theData.ShortCut)
+                        {
+                            string cmd = "\"" + @"C:\Program Files\ShrewSoft\VPN Client\" + "ipsecc.exe" + "\"" + " -r " + obj.ConName + " -u " + obj.User;
+
+                            try
+                            {
+                                File.WriteAllText(DesktopPath + @"\" + obj.ConName + ".cmd", cmd);
+                            }
+                            catch (Exception ex)
+                            {
+                                MessageBox.Show(ex.Message.ToString(),
+                                @"Fehler",
+                                MessageBoxButton.OK,
+                                MessageBoxImage.Error
+                                );
+                                return false;
+                            }
+                        }
+                    }
+                }
             }
-            Config = string.Join("\n", ConfArray.ToArray());
-
-            //save vpn connection
-
-            // if file exists and the option to change the file is not choosen, attach timestamp
-            if (File.Exists(ShrewSitesDir + @"\" + theData.ConName) && (copy||newFile))
-                theData.ConName += " " + localDate.ToString();
-
-            try
-            {
-                File.WriteAllText(ShrewSitesDir + @"\" + theData.ConName, Config);
-            }
-            catch(Exception ex)
-            {
-                MessageBox.Show(ex.Message.ToString(),
-                @"Fehler",
-                MessageBoxButton.OK,
-                MessageBoxImage.Error
-                );
-                return false;
-            }
-
-
-            // wirte the shortcut to the deskop
-            if (theData.ShortCut)
-                /* {
-                     string cmd = "\""+@"C:\Program Files\ShrewSoft\VPN Client\" + "ipsecc.exe" + "\"" +" -r " + theData.ConName + " -u " + theData.User;
-
-                     try
-                     {
-                         File.WriteAllText(DesktopPath + @"\" + theData.ConName + ".cmd", cmd);
-                     }
-                     catch (Exception ex)
-                     {
-                         MessageBox.Show(ex.Message.ToString(),
-                         @"Fehler",
-                         MessageBoxButton.OK,
-                         MessageBoxImage.Error
-                         );
-                         return false;
-                     }
-                 }*/
-
-            {
-                StreamWriter sw = new StreamWriter(DesktopPath + @"\" + theData.ConName + ".url");
-                sw.WriteLine("[InternetShortcut]");
-                //sw.WriteLine("URL=file:///" + @"C:\Program Files\ShrewSoft\VPN Client\ipsecc.exe -r " + theData.ConName + " -u " + theData.User);
-                sw.WriteLine("URL=file://" + @"""C:\Program Files\ShrewSoft\VPN Client\ipsecc.exe"" -r " + theData.ConName + " -u " + theData.User);
-                sw.WriteLine("IconIndex=0");
-            //    sw.WriteLine("IconFile=" + shortcutIcon);
-                sw.Close();
-
-            }
+            //-----------------------------------------------------------------------------------------------------------------------------------------------------------
             return true;
         }
 
 
         // load the config file and write the data to theData
-        public void load()
+        public UserDataObject load()
         {
             string Config = read();
             string[] ConfArray;
+            string u = "", p = "", host = "";
 
             ConfArray = Config.Split('\n');
             int i = 0;
             foreach (string line in ConfArray)
             {
                 if (line.StartsWith(@"s:network-host:"))
-                    theData.Host = ConfArray[i].Substring("s:network-host:".Count()).Trim();
+                    host = ConfArray[i].Substring("s:network-host:".Count()).Trim();
                 if (line.StartsWith(@"s:ident-client-data:"))
-                    theData.User = ConfArray[i].Substring(@"s:ident-client-data:".Count()).Trim();
+                    u = ConfArray[i].Substring(@"s:ident-client-data:".Count()).Trim();
                 if (line.StartsWith(@"b:auth-mutual-psk:"))
-                    theData.PSK = Base64Decode( ConfArray[i].Substring(@"b:auth-mutual-psk:".Count()));
+                    p = Base64Decode(ConfArray[i].Substring(@"b:auth-mutual-psk:".Count()));
                 i++;
             }
+
+            theData.Host = host;
+            return new UserDataObject(true, u, p, theData.SelectedCon);
         }
 
         private string read()
         {
-            string Config;
+            string Config = "";
             try
             {
-                Config = File.ReadAllText(ShrewSitesDir + @"\" + theData.ConName, Encoding.Default);
+                Config = File.ReadAllText(ShrewSitesDir + @"\" + theData.SelectedCon, Encoding.Default);
             }
             catch (FileNotFoundException)
             {
                 MessageBox.Show(@"Fehler",
-                @"Lesen von " + ShrewSitesDir + @"\" + theData.ConName + @" war nicht möglich" + "Error: 42.002",
+                @"Lesen von " + ShrewSitesDir + @"\" + theData.SelectedCon + @" war nicht möglich" + "Error: 42.002",
                 MessageBoxButton.OK,
                 MessageBoxImage.Error
                 );

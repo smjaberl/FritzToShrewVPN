@@ -89,8 +89,11 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="avm.cs" />
     <Compile Include="DataVPN.cs" />
+    <Compile Include="FritzConnector.cs" />
     <Compile Include="shrewHandler.cs" />
+    <Compile Include="UserDataObject.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
