@@ -31,24 +31,38 @@ Die VPN Verbindungsdaten zur Fritzbox müssen bekannt sein
 
 #### Installation
 
-[Download FritzToShrewVPN](https://github.com/smjaberl/FritzToShrewVPN/archive/publish.zip)
+[Download FritzToShrewVPN.exe](https://github.com/smjaberl/FritzToShrewVPN/raw/publish/FritzToShrewVPN.exe)
 
-setup.exe welche in dem zip liegt, ausführen
+FritzToShrewVPN.exe an einem beliebigen Ort speichern und Ausführen.
  
 
 ### Anwendung
 
 -   Programm starten
 
--   Von oben nach unten lesen und dabei die passende Auswahl treffen. Dies
-    sollte selbsterklärend sein
+#### einzelne Verbindung manuell einrichten
 
--   Domainname/IP, Benutzernamen und PSK eintragen
+- Auf der rechten Seite durch Doppel-Klick die Felder "Benutzer", "PSK" und "Name der Verbindung" bearbeiten.
 
--   “Speichern und Beenden” klicken
+- Internetadresse (DNS Name oder IP) der Fritzbox eingeben.
 
--   fertig
+- Speichern klicken
 
+- fertig
+
+#### mehrere Verbindungen aus der FritzBox laden
+
+- Auf der linken Seite die IP oder Adresse (fritz.box) eingeben.
+
+- Das Passwort der FritzBox oder Benutzername und Passwort eines FritzBox Administrators eingeben.
+
+- "Lade Daten aus FritzBox" klicken.
+
+- Auf der Linken Seite die zu speichernden Verbindungen durch an- bzw. abhaken wählen.
+
+- Speichern klicken.
+
+- fertig.
  
 
 ![](Hauptfenster.PNG)
