@@ -65,6 +65,9 @@ namespace FritzToShrewVPN
             {
                 Config = read();
             }
+
+            ConfArray = Config.Split('\n');
+
             //replace operation in Config
 
             //---------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -72,7 +75,6 @@ namespace FritzToShrewVPN
             {
                 if (obj.Check)
                 {
-                    ConfArray = Config.Split('\n');
                     int i = 0;
                     foreach (string line in ConfArray)
                     {
@@ -81,34 +83,57 @@ namespace FritzToShrewVPN
                         if (line.StartsWith(@"s:ident-client-data:"))
                             ConfArray[i] = @"s:ident-client-data:" + obj.User;
                         if (line.StartsWith(@"b:auth-mutual-psk:"))
-                            ConfArray[i] = @"b:auth-mutual-psk:" + Base64Encode(obj.PSK); i++;
+                            ConfArray[i] = @"b:auth-mutual-psk:" + Base64Encode(obj.PSK);
                     }
+                    i++;
+
                     Config = string.Join("\n", ConfArray.ToArray());
 
                     //save vpn connection
 
                     bool cancel = false;
 
-                    // if file exists and the option to change the file is not choosen, attach timestamp
                     if (File.Exists(ShrewSitesDir + @"\" + obj.ConName))
                     {
-                        var result = MessageBox.Show(ShrewSitesDir + @"\" + obj.ConName + "existiert schon, möchtest du die Datei überschreiben?",
-                        @"Fehler",
+                        var result = MessageBox.Show(ShrewSitesDir + @"\" + obj.ConName + " existiert schon, möchtest du die Datei überschreiben?",
+                        @"Warnung",
                         MessageBoxButton.YesNoCancel,
                         MessageBoxImage.Question
                         );
 
-                        switch(result)
+                        switch (result)
                         {
-                            case MessageBoxResult.Yes:  break;
-                            case MessageBoxResult.Cancel: cancel= true; break;    //Cancel all Operations
+                            case MessageBoxResult.Yes: break;
+                            case MessageBoxResult.Cancel: cancel = true; break;    //Cancel all Operations
                             case MessageBoxResult.No: continue;       //Cancel Operations für one Connection
                         }
                         if (cancel) break;
+                    }
+
+                    try
+                    {
+                        File.WriteAllText(ShrewSitesDir + @"\" + obj.ConName, Config);
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show(ex.Message.ToString(),
+                        @"Fehler",
+                        MessageBoxButton.OK,
+                        MessageBoxImage.Error
+                        );
+                        return false;
+                    }
+
+
+
+                    // wirte the shortcut to the deskop
+                    if (theData.ShortCut)
+                    {
+                        string cmd = "\"" + @"C:\Program Files\ShrewSoft\VPN Client\" + "ipsecc.exe" + "\"" + " -r " + obj.ConName + " -u " + obj.User;
 
                         try
                         {
-                           File.WriteAllText(ShrewSitesDir + @"\" + obj.ConName, Config);
+                            File.WriteAllText(DesktopPath + @"\" + obj.ConName + ".cmd", cmd);
                         }
                         catch (Exception ex)
                         {
@@ -118,27 +143,6 @@ namespace FritzToShrewVPN
                             MessageBoxImage.Error
                             );
                             return false;
-                        }
-
-
-                        // wirte the shortcut to the deskop
-                        if (theData.ShortCut)
-                        {
-                            string cmd = "\"" + @"C:\Program Files\ShrewSoft\VPN Client\" + "ipsecc.exe" + "\"" + " -r " + obj.ConName + " -u " + obj.User;
-
-                            try
-                            {
-                                File.WriteAllText(DesktopPath + @"\" + obj.ConName + ".cmd", cmd);
-                            }
-                            catch (Exception ex)
-                            {
-                                MessageBox.Show(ex.Message.ToString(),
-                                @"Fehler",
-                                MessageBoxButton.OK,
-                                MessageBoxImage.Error
-                                );
-                                return false;
-                            }
                         }
                     }
                 }
