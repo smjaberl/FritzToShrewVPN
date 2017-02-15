@@ -84,8 +84,9 @@ namespace FritzToShrewVPN
                             ConfArray[i] = @"s:ident-client-data:" + obj.User;
                         if (line.StartsWith(@"b:auth-mutual-psk:"))
                             ConfArray[i] = @"b:auth-mutual-psk:" + Base64Encode(obj.PSK);
+                        i++;
                     }
-                    i++;
+                   
 
                     Config = string.Join("\n", ConfArray.ToArray());
 
@@ -146,6 +147,7 @@ namespace FritzToShrewVPN
                         }
                     }
                 }
+                
             }
             //-----------------------------------------------------------------------------------------------------------------------------------------------------------
             return true;
